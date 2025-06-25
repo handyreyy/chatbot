@@ -5,7 +5,7 @@ export const sendMessage = async (
   payload: ChatRequest
 ): Promise<ChatResponse> => {
   const res = await axios.post<ChatResponse>(
-    "http://localhost:8080/api/message",
+    "https://chatbot-production-3c89.up.railway.app/api/message",
     payload
   );
   return res.data;
