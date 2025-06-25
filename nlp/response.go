@@ -7,7 +7,7 @@ import (
 )
 
 func GetResponse(intent string) string {
-	filePath := fmt.Sprintf("../mock-data/%s.json", intent)
+	filePath := fmt.Sprintf("mock-data/%s.json", intent)
 
 	data, err := os.ReadFile(filePath)
 	if err != nil {
