@@ -1,0 +1,32 @@
+# ==========================
+# FRONTEND (React + Vite)
+# ==========================
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.vite/
+frontend/.DS_Store
+
+# ==========================
+# BACKEND (Go)
+# ==========================
+nlp/bin/
+nlp/*.out
+nlp/*.exe
+nlp/.DS_Store
+
+# ==========================
+# BUILD/LOGS
+# ==========================
+**/build/
+**/dist/
+**/*.log
+
+# ==========================
+# EDITOR / OS JUNK
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
