@@ -3,9 +3,14 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
+
+type MessageRequest struct {
+	Text string `json:"text" binding:"required"`
+}
 
 func main() {
 	r := gin.Default()
@@ -24,10 +29,9 @@ func main() {
 	})
 
 	r.POST("/api/message", func(c *gin.Context) {
-		var req struct {
-			Text string `json:"text"`
-		}
-		if err := c.BindJSON(&req); err != nil {
+		var req MessageRequest
+		if err := c.ShouldBindJSON(&req); err != nil {
+			log.Println("Invalid request:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
 			return
 		}
@@ -35,11 +39,13 @@ func main() {
 		intent := DetectIntent(req.Text)
 		response := GetResponse(intent)
 
-		c.JSON(http.StatusOK, gin.H{
-			"response": response,
-		})
+		c.JSON(http.StatusOK, gin.H{"response": response})
 	})
 
-	log.Println("Server running at http://localhost:8080")
-	r.Run("0.0.0.0:8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Printf("Server running on port %s", port)
+	r.Run("0.0.0.0:" + port)
 }
