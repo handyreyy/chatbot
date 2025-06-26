@@ -33,6 +33,8 @@ Chatbot internal sederhana berbasis regex NLP untuk menjawab pertanyaan seputar 
 
 #### 4. Mengenai status kepegawaian
 
+#### 5. Mengenai BPJS
+
 ---
 
 ## 🏗️ Arsitektur Singkat
@@ -117,19 +119,21 @@ atau jika ingin menggunakan port lain
 ```bash
 cd nlp
 go mod download
-PORT=port go run .
+PORT=[replace_port] go run .
 ```
 
-Jika menjalankan secara konvensional, jangan lupa ubah baris berikut di `nlp/response.go`
+> Server akan berjalan di `http://0.0.0.0:8080` atau sesuai port yang digunakan.
+
+Dan jangan lupa ubah baris berikut di `nlp/response.go`
 
 ```
 filePath := fmt.Sprintf("mock-data/%s.json", intent)
 ```
 
-menjadi
+Menjadi
 
 ```
-filePath := fmt.Sprintf("..mock-data/%s.json", intent)
+filePath := fmt.Sprintf("../mock-data/%s.json", intent)
 ```
 
 ### Alternatif: Menjalankan Backend dengan Docker
@@ -160,6 +164,8 @@ cd frontend
 npm install
 npm run dev
 ```
+
+Jangan lupa untuk mengubah **endpointnya** di `src/api/message.ts` menjadi `http://localhost:8080/api/message` atau sesuai port backend yang dijalankan.
 
 > Frontend akan berjalan di `http://localhost:5173` (atau sesuai konfigurasi Vite)
 
