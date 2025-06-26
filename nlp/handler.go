@@ -17,6 +17,9 @@ func DetectIntent(text string) string {
 	if matched, _ := regexp.MatchString(`(?i)\b(status|kontrak|tetap|pegawai tetap|pegawai kontrak)\b`, text); matched {
 		return "status_karyawan"
 	}
+	if matched, _ := regexp.MatchString(`(?i)\b(bpjs|jaminan|klaim|asuransi)\b`, text); matched {
+		return "info_bpjs"
+	}
 
 	return "unknown"
 }
